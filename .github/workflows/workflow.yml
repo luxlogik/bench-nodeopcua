@@ -191,7 +191,7 @@ jobs:
         run: pnpm --filter node-opcua-address-space run test:long
 
   check_test_ports:
-    runs-on: compiler-8cpu
+    runs-on: compiler-4cpu
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v7
