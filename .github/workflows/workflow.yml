@@ -15,6 +15,8 @@ permissions:
   contents: read
 
 env:
+  # bench: compiler-8cpu has 16 GB; the default 7 workers (0.9 x 8 cores) exhaust it. 4 = what the 4-vCPU GitHub-hosted runner gets.
+  CPU: "4"
   COVERALLS_REPO_TOKEN: "${{ secrets.COVERALLS_REPO_TOKEN }}"
   COVERALLS_GIT_BRANCH: "${{ github.ref }}"
 
