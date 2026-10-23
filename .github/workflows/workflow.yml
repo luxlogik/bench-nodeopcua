@@ -23,7 +23,7 @@ jobs:
   # XML sources and the current convert tool. Also runs the workspace
   # version-consistency check — both are pure read/verify jobs.
   generated-drift-check:
-    runs-on: ubuntu-latest
+    runs-on: compiler-8cpu
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v7
@@ -54,7 +54,7 @@ jobs:
   # packages/, packages_extra/, and tools/. Pure static check, no build
   # needed — kept fast and separate from the build/test matrix jobs.
   lint:
-    runs-on: ubuntu-latest
+    runs-on: compiler-8cpu
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v7
@@ -176,7 +176,7 @@ jobs:
     # not in `pnpm test`: the standard suite has to stay short enough that nobody thinks
     # twice about running it. They still gate, because what they protect - that the
     # format carries the document - is not visible in any smaller test.
-    runs-on: ubuntu-latest
+    runs-on: compiler-8cpu
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v7
@@ -191,7 +191,7 @@ jobs:
         run: pnpm --filter node-opcua-address-space run test:long
 
   check_test_ports:
-    runs-on: ubuntu-latest
+    runs-on: compiler-8cpu
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v7
@@ -214,7 +214,7 @@ jobs:
         run: node tools/check-test-ports/test/test_scanner.js
 
   build:
-    runs-on: ubuntu-latest
+    runs-on: compiler-8cpu
     timeout-minutes: 45
     strategy:
       fail-fast: false
@@ -287,7 +287,7 @@ jobs:
   # One flavour is enough. What this proves is config resolution under pnpm's strict
   # node_modules layout, which is neither platform- nor Node-version-specific.
   build_per_package:
-    runs-on: ubuntu-latest
+    runs-on: compiler-8cpu
     timeout-minutes: 60
     strategy:
       matrix:
@@ -335,7 +335,7 @@ jobs:
           NODE_OPTIONS: --expose-gc
 
   coverage:
-    runs-on: ubuntu-latest
+    runs-on: compiler-8cpu
     timeout-minutes: 45
     strategy:
       matrix:
