@@ -29,6 +29,11 @@ jobs:
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v7
+      - name: Enable IPv6 loopback (absent on compiler runner image; GitHub-hosted has ::1)
+        run: |
+          sudo sysctl -w net.ipv6.conf.all.disable_ipv6=0 net.ipv6.conf.lo.disable_ipv6=0 || true
+          ip -6 addr show dev lo | grep -q '::1' || sudo ip addr add ::1/128 dev lo || true
+          ip -6 addr show dev lo || true
       - uses: pnpm/action-setup@v6
       - uses: actions/setup-node@v7
         with:
@@ -60,6 +65,11 @@ jobs:
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v7
+      - name: Enable IPv6 loopback (absent on compiler runner image; GitHub-hosted has ::1)
+        run: |
+          sudo sysctl -w net.ipv6.conf.all.disable_ipv6=0 net.ipv6.conf.lo.disable_ipv6=0 || true
+          ip -6 addr show dev lo | grep -q '::1' || sudo ip addr add ::1/128 dev lo || true
+          ip -6 addr show dev lo || true
       - uses: pnpm/action-setup@v6
       - uses: actions/setup-node@v7
         with:
@@ -182,6 +192,11 @@ jobs:
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v7
+      - name: Enable IPv6 loopback (absent on compiler runner image; GitHub-hosted has ::1)
+        run: |
+          sudo sysctl -w net.ipv6.conf.all.disable_ipv6=0 net.ipv6.conf.lo.disable_ipv6=0 || true
+          ip -6 addr show dev lo | grep -q '::1' || sudo ip addr add ::1/128 dev lo || true
+          ip -6 addr show dev lo || true
       - uses: pnpm/action-setup@v6
       - uses: actions/setup-node@v7
         with:
@@ -197,6 +212,11 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v7
+      - name: Enable IPv6 loopback (absent on compiler runner image; GitHub-hosted has ::1)
+        run: |
+          sudo sysctl -w net.ipv6.conf.all.disable_ipv6=0 net.ipv6.conf.lo.disable_ipv6=0 || true
+          ip -6 addr show dev lo | grep -q '::1' || sudo ip addr add ::1/128 dev lo || true
+          ip -6 addr show dev lo || true
       # No pnpm setup and no cache: the scanner has no dependencies, so this job never
       # installs. Leaving `cache: 'pnpm'` here failed the job outright - setup-node's
       # post step looks for a pnpm store that was never created and reports a Path
@@ -230,6 +250,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v7
+      - name: Enable IPv6 loopback (absent on compiler runner image; GitHub-hosted has ::1)
+        run: |
+          sudo sysctl -w net.ipv6.conf.all.disable_ipv6=0 net.ipv6.conf.lo.disable_ipv6=0 || true
+          ip -6 addr show dev lo | grep -q '::1' || sudo ip addr add ::1/128 dev lo || true
+          ip -6 addr show dev lo || true
       - uses: pnpm/action-setup@v6
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v7
@@ -297,6 +322,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v7
+      - name: Enable IPv6 loopback (absent on compiler runner image; GitHub-hosted has ::1)
+        run: |
+          sudo sysctl -w net.ipv6.conf.all.disable_ipv6=0 net.ipv6.conf.lo.disable_ipv6=0 || true
+          ip -6 addr show dev lo | grep -q '::1' || sudo ip addr add ::1/128 dev lo || true
+          ip -6 addr show dev lo || true
       - uses: pnpm/action-setup@v6
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v7
@@ -344,6 +374,11 @@ jobs:
         node-version: [22.x]
     steps:
       - uses: actions/checkout@v7
+      - name: Enable IPv6 loopback (absent on compiler runner image; GitHub-hosted has ::1)
+        run: |
+          sudo sysctl -w net.ipv6.conf.all.disable_ipv6=0 net.ipv6.conf.lo.disable_ipv6=0 || true
+          ip -6 addr show dev lo | grep -q '::1' || sudo ip addr add ::1/128 dev lo || true
+          ip -6 addr show dev lo || true
       - uses: pnpm/action-setup@v6
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v7
